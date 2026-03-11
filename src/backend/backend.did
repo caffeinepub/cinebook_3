@@ -1,0 +1,63 @@
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Showtime = 
+ record {
+   date: text;
+   hall: text;
+   id: nat;
+   movieId: nat;
+   price: nat;
+   time: text;
+   totalSeats: nat;
+ };
+type Movie = 
+ record {
+   description: text;
+   duration: nat;
+   genre: text;
+   id: nat;
+   isActive: bool;
+   posterUrl: text;
+   rating: text;
+   title: text;
+ };
+type Booking = 
+ record {
+   bookingDate: text;
+   id: nat;
+   movieId: nat;
+   seats: vec text;
+   showtimeId: nat;
+   status: text;
+   totalPrice: nat;
+   userId: principal;
+ };
+service : {
+  _initializeAccessControlWithSecret: (userSecret: text) -> ();
+  addMovie: (title: text, description: text, genre: text, duration: nat,
+   rating: text, posterUrl: text) -> (nat);
+  addShowtime: (movieId: nat, date: text, time: text, hall: text, totalSeats:
+   nat, price: nat) -> (nat);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  cancelBooking: (id: nat) -> (bool);
+  createBooking: (showtimeId: nat, seats: vec text) -> (nat);
+  deleteMovie: (id: nat) -> (bool);
+  deleteShowtime: (id: nat) -> (bool);
+  getAdminStats: () -> (nat, nat) query;
+  getAllBookings: () -> (vec Booking) query;
+  getAllShowtimes: () -> (vec Showtime) query;
+  getBookedSeats: (showtimeId: nat) -> (vec text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getMovie: (id: nat) -> (opt Movie) query;
+  getMovies: () -> (vec Movie) query;
+  getMyBookings: () -> (vec Booking) query;
+  getShowtimes: (movieId: nat) -> (vec Showtime) query;
+  isCallerAdmin: () -> (bool) query;
+  updateMovie: (id: nat, title: text, description: text, genre: text,
+   duration: nat, rating: text, posterUrl: text, isActive: bool) -> (
+   bool);
+}
