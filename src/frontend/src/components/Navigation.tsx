@@ -18,6 +18,7 @@ export function Navigation() {
 
   const navLinks = [
     { label: "Home", to: "/", ocid: "nav.home_link" },
+    { label: "Show Timings", to: "/showtimes", ocid: "nav.showtimings_link" },
     ...(isLoggedIn
       ? [
           {

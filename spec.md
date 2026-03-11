@@ -1,28 +1,22 @@
-# CineBook - Online Movie Ticket Booking Platform
+# CineBook
 
 ## Current State
-New project. No existing code.
+The app has a homepage with movie listings, and showtimes are only visible on the individual MovieDetailPage. There is no dedicated page or section showing all show timings at a glance.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Movie catalog with title, description, genre, duration, rating, poster
-- Showtimes/schedules per movie (date, time, theater/hall)
-- Seat selection grid per showtime (rows x columns, seat status: available/booked)
-- Booking flow: select movie -> select showtime -> select seats -> confirm booking
-- Booking confirmation with booking ID, movie, seats, total price
-- Admin panel: add/edit movies, manage showtimes, view all bookings
-- User bookings: view current user's bookings
-- Sample seed data: 5 movies, multiple showtimes each
+- A new "Show Timings" page (`/showtimes`) that lists all upcoming showtimes grouped by movie, showing date, time, hall, price, and available seats.
+- Navigation link to the Show Timings page in the top nav.
 
 ### Modify
-N/A
+- Navigation component to include a "Show Timings" link.
+- App routing to register the new `/showtimes` route.
 
 ### Remove
-N/A
+- Nothing removed.
 
 ## Implementation Plan
-1. Backend data models: Movie, Showtime, Seat, Booking, User principal tracking
-2. Backend APIs: CRUD for movies/showtimes, seat availability query, book seats, get user bookings, admin stats
-3. Frontend pages: Home (movie listing), Movie detail, Showtime selection, Seat picker, Booking confirmation, My Bookings, Admin panel
-4. Authorization: admin role for managing content, authenticated users for booking
+1. Create `ShowTimingsPage.tsx` that calls `getAllShowtimes()` and `getMovies()` backend APIs, groups showtimes by movie, and renders them in a clean table/card layout with date, time, hall, price, and a "Book" button.
+2. Register `/showtimes` route in `App.tsx`.
+3. Add "Show Timings" nav link in `Navigation.tsx`.

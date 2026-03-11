@@ -14,6 +14,7 @@ import { HomePage } from "./pages/HomePage";
 import { MovieDetailPage } from "./pages/MovieDetailPage";
 import { MyBookingsPage } from "./pages/MyBookingsPage";
 import { SeatSelectionPage } from "./pages/SeatSelectionPage";
+import { ShowTimingsPage } from "./pages/ShowTimingsPage";
 
 // Root layout
 function RootLayout() {
@@ -70,6 +71,12 @@ const adminRoute = createRoute({
   component: AdminPage,
 });
 
+const showTimingsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/showtimes",
+  component: ShowTimingsPage,
+});
+
 const routeTree = rootRoute.addChildren([
   homeRoute,
   movieRoute,
@@ -77,6 +84,7 @@ const routeTree = rootRoute.addChildren([
   bookingRoute,
   myBookingsRoute,
   adminRoute,
+  showTimingsRoute,
 ]);
 
 const router = createRouter({ routeTree });
